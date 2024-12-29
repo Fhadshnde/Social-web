@@ -1,0 +1,65 @@
+.rightbarFriend {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.rightbarProfileImgContainer {
+  margin-right: 10px;
+  position: relative;
+}
+
+.rightbarProfileImg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.rightbarOnline {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: limegreen;
+  position: absolute;
+  top: -2px;
+  right: 0;
+  border: 2px solid white;
+}
+
+.rightbarUsername {
+  font-weight: 500;
+}
+
+/* تصميم مستجيب */
+@media (max-width: 600px) {
+  .rightbarProfileImg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .rightbarOnline {
+    width: 10px;
+    height: 10px;
+  }
+
+  .rightbarUsername {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .rightbarProfileImg {
+    width: 35px;
+    height: 35px;
+  }
+
+  .rightbarOnline {
+    width: 11px;
+    height: 11px;
+  }
+
+  .rightbarUsername {
+    font-size: 15px;
+  }
+}

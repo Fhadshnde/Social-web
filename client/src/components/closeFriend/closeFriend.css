@@ -1,0 +1,42 @@
+.sidebarFriend {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+/* تحسين صورة الصديق لتكون مستجيبة */
+.sidebarFriendImg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+/* تحسين النص ليكون مستجيب */
+.sidebarFriendName {
+  font-size: 16px;
+}
+
+/* تصميم مستجيب */
+@media (max-width: 600px) {
+  .sidebarFriendImg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .sidebarFriendName {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .sidebarFriendImg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .sidebarFriendName {
+    font-size: 15px;
+  }
+}
