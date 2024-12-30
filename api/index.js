@@ -12,15 +12,22 @@ const path = require("path");
 const fs = require("fs");
 
 dotenv.config();
+const cors = require("cors");
+app.use(cors());
+const corsOptions = {
+  origin: "http://localhost:3000",  
+  methods: "GET,POST",
+  allowedHeaders: "Content-Type,Authorization"
+};
 
-// تحديث الاتصال بـ MongoDB
+app.use(cors(corsOptions));
 mongoose.connect(
   process.env.MONGO_URL,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useFindAndModify: false, // لتجنب التحذيرات عن useFindAndModify
-    useCreateIndex: true, // لضمان استخدام createIndexes بدلاً من ensureIndex
+    useFindAndModify: false, 
+    useCreateIndex: true, 
   },
   () => {
     console.log("Connected to MongoDB");
@@ -28,17 +35,15 @@ mongoose.connect(
 );
 if (!process.env.MONGO_URL) {
   console.error("MONGO_URL is not defined in .env file");
-  process.exit(1);  // إنهاء التطبيق إذا لم يتم تعريف المتغير
+  process.exit(1); 
 }
 
-// تأكد من وجود مجلد الصور
 if (!fs.existsSync(path.join(__dirname, "public/images"))) {
   fs.mkdirSync(path.join(__dirname, "public/images"), { recursive: true });
 }
 
 app.use("/images", express.static(path.join(__dirname, "public/images")));
 
-// middleware
 app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
@@ -66,7 +71,6 @@ app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/posts", postRoute);
 
-// بدء الخادم
 app.listen(8800, () => {
   console.log(process.env.MONGO_URL )
   console.log("Backend server is running!");
