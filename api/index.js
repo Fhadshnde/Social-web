@@ -13,9 +13,15 @@ const fs = require("fs");
 
 dotenv.config();
 
+// تحديث الاتصال بـ MongoDB
 mongoose.connect(
   process.env.MONGO_URL,
-  { useNewUrlParser: true, useUnifiedTopology: true },
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false, // لتجنب التحذيرات عن useFindAndModify
+    useCreateIndex: true, // لضمان استخدام createIndexes بدلاً من ensureIndex
+  },
   () => {
     console.log("Connected to MongoDB");
   }
@@ -28,7 +34,7 @@ if (!fs.existsSync(path.join(__dirname, "public/images"))) {
 
 app.use("/images", express.static(path.join(__dirname, "public/images")));
 
-//middleware
+// middleware
 app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
@@ -56,6 +62,8 @@ app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/posts", postRoute);
 
+// بدء الخادم
 app.listen(8800, () => {
-  console.log("Backend server is running!")
+  console.log(process.env.MONGO_URL )
+  console.log("Backend server is running!");
 });
