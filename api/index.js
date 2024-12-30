@@ -26,6 +26,10 @@ mongoose.connect(
     console.log("Connected to MongoDB");
   }
 );
+if (!process.env.MONGO_URL) {
+  console.error("MONGO_URL is not defined in .env file");
+  process.exit(1);  // إنهاء التطبيق إذا لم يتم تعريف المتغير
+}
 
 // تأكد من وجود مجلد الصور
 if (!fs.existsSync(path.join(__dirname, "public/images"))) {
